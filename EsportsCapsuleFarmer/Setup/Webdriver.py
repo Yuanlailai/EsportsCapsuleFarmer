@@ -15,9 +15,18 @@ class Webdriver:
         """
         match self.browser:
             case "chrome":
-                driverPath = DriverUpdater.install(path=".", driver_name=DriverUpdater.chromedriver, upgrade=True, check_driver_is_up_to_date=True, old_return=False)
+                # choose driverPath automatically to manually
+                driverPath = "D:\EsportsCapsuleFarmer-master\chromedriver107.exe"
+                # driverPath = DriverUpdater.install(path=".", driver_name=DriverUpdater.chromedriver, upgrade=False, check_driver_is_up_to_date=True, old_return=False)
                 options = self.addWebdriverOptions(webdriver.ChromeOptions())
+                # force chrome path
+                options.binary_location = r"D:\\Chrome107\\App\\Chrome-bin\\chrome.exe"
+                # force chromedata path
+                # edit website settings at lolesports.com. change sound auto to enable
+                options.add_argument("user-data-dir=D:\\EsportsCapsuleFarmer-master\\ChromeData")
+                # options.add_argument("user-data-dir=D:\\Chrome107\\Data\\profile")
                 service = ChromeService(driverPath)
+                print(driverPath)
                 return webdriver.Chrome(service=service, options=options)            
             case "firefox":
                 driverPath = DriverUpdater.install(path=".", driver_name=DriverUpdater.geckodriver, upgrade=True, check_driver_is_up_to_date=True, old_return=False)
@@ -25,15 +34,19 @@ class Webdriver:
                 service = FirefoxService(driverPath)
                 return webdriver.Firefox(service=service, options=options)
             case "edge":  # NO CURRENT DRIVER AVAILABLE
-                driverPath = DriverUpdater.install(path=".", driver_name=DriverUpdater.edgedriver, upgrade=True, check_driver_is_up_to_date=True, old_return=False)
+                driverpath = "D:\EsportsCapsuleFarmer-master\msedgedriver.exe"
+                # driverPath = DriverUpdater.install(path=".", driver_name=DriverUpdater.edgedriver, upgrade=True, check_driver_is_up_to_date=True, old_return=False)
                 options = self.addWebdriverOptions(webdriver.EdgeOptions())
                 service = EdgeService(driverPath)
+                print(driverPath)
                 return webdriver.Edge(service=service, options=options)
 
     def addWebdriverOptions(self, options):
         options.add_argument("log-level=3")
+        options.add_experimental_option('useAutomationExtension', False)
+        options.add_experimental_option("excludeSwitches", ['enable-automation'])
         if self.headless:
             options.add_argument("--headless")
-            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 Edg/103.0.1264.71"
+            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
             options.add_argument(f'user-agent={user_agent}')
         return options
