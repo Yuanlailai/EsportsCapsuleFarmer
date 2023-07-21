@@ -45,7 +45,7 @@ class Match:
             self.driver.switch_to.window(self.originalWindow) # just to be sure
             time.sleep(2)
             # To watch all matches
-            self.driver.get("https://lolesports.com/schedule?leagues=lcs,north_american_challenger_league,lcs_challengers_qualifiers,college_championship,cblol-brazil,lck,lcl,lco,lec,ljl-japan,lla,lpl,pcs,turkiye-sampiyonluk-ligi,vcs,msi,worlds,all-star,emea_masters,lfl,nlc,elite_series,liga_portuguesa,pg_nationals,ultraliga,superliga,primeleague,hitpoint_masters,esports_balkan_league,greek_legends,arabian_league,lck_academy,ljl_academy,lck_challengers_league,cblol_academy,north_regional_league,south_regional_league,tft_esports")
+            self.driver.get("https://lolesports.com/schedule?leagues=lcs,cblol-brazil,lck,lcl,lco,lec,ljl-japan,lla,lpl,pcs,turkiye-sampiyonluk-ligi,vcs,msi,worlds,all-star,tft_esports")
             time.sleep(5)
             liveMatches = self.getLiveMatches()
             if len(liveMatches) == 1:
